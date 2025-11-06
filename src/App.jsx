@@ -31,7 +31,6 @@ export default function App() {
   const [user, setUser] = useState(null);
 
   const handleCheckout = () => {
-    // For now, prompt auth if not signed in
     if (!user) {
       setAuthOpen(true);
     } else {
@@ -45,13 +44,17 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-slate-50">
+    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-slate-100">
       {/* Top Navigation */}
-      <header className="sticky top-0 z-40 border-b border-slate-200/60 bg-white/75 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
-          <a href="#" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-xl bg-slate-900"></div>
-            <span className="text-base font-semibold tracking-tight">Glasmart</span>
+      <header className="sticky top-0 z-40 border-b border-slate-200/60 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <a href="#" className="flex items-center gap-3">
+            <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-slate-900 to-slate-700 text-white shadow-sm">
+              <span className="text-xs font-bold">GM</span>
+            </div>
+            <span className="bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-lg font-semibold tracking-tight text-transparent">
+              Glasmart
+            </span>
           </a>
 
           <div className="flex items-center gap-2">
@@ -60,18 +63,18 @@ export default function App() {
             ) : null}
             <button
               onClick={() => setAuthOpen(true)}
-              className="hidden items-center gap-2 rounded-full border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 md:flex"
+              className="hidden items-center gap-2 rounded-full border border-slate-200/80 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 md:flex"
             >
               <User className="h-4 w-4" /> {user ? 'Account' : 'Sign in'}
             </button>
             <button
               onClick={() => setOpenCart(true)}
-              className="relative inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800"
+              className="relative inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-slate-800"
             >
               <ShoppingCart className="h-4 w-4" />
               <span className="hidden md:inline">Cart</span>
               {cart.count > 0 && (
-                <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-emerald-500 px-1.5 text-[10px] font-bold text-white">
+                <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-emerald-500 px-1.5 text-[10px] font-bold text-white shadow">
                   {cart.count}
                 </span>
               )}
@@ -80,18 +83,18 @@ export default function App() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl space-y-10 px-6 py-6 md:space-y-12 md:py-10">
+      <main className="mx-auto max-w-7xl space-y-12 px-6 py-8 md:py-12">
         <Hero3D />
         <ProductGrid onAdd={cart.add} />
 
         {/* Benefits */}
-        <section className="grid grid-cols-1 gap-4 rounded-2xl bg-white p-6 shadow-sm md:grid-cols-3">
+        <section className="grid grid-cols-1 gap-4 rounded-2xl bg-white/80 p-6 shadow-sm ring-1 ring-slate-200 backdrop-blur md:grid-cols-3">
           {[
             { title: 'Bank-grade security', desc: 'Encrypted payments and privacy-first infrastructure.' },
             { title: 'Fast shipping', desc: 'Dispatched within 24 hours with real-time tracking.' },
             { title: 'Easy returns', desc: '30-day hassle-free returns on all items.' },
           ].map((b) => (
-            <div key={b.title} className="rounded-xl border border-slate-200 p-4">
+            <div key={b.title} className="rounded-xl border border-slate-200/70 bg-white p-4 shadow-sm">
               <h4 className="text-sm font-semibold text-slate-900">{b.title}</h4>
               <p className="mt-1 text-xs text-slate-600">{b.desc}</p>
             </div>
@@ -99,21 +102,21 @@ export default function App() {
         </section>
 
         {/* Checkout CTA */}
-        <section id="checkout" className="rounded-2xl bg-slate-900 p-8 text-white">
+        <section id="checkout" className="overflow-hidden rounded-2xl bg-slate-900 p-8 text-white shadow-sm">
           <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
             <div>
               <h3 className="text-2xl font-semibold">Ready for a secure checkout?</h3>
               <p className="mt-1 text-white/80">Sign in to sync your cart and complete purchase with confidence.</p>
             </div>
             <div className="flex gap-3">
-              <button onClick={() => setAuthOpen(true)} className="rounded-xl bg-white px-5 py-2 text-sm font-semibold text-slate-900 hover:bg-white/90">Sign in</button>
-              <button onClick={handleCheckout} className="rounded-xl border border-white/20 bg-white/5 px-5 py-2 text-sm font-semibold text-white backdrop-blur hover:bg-white/10">Checkout</button>
+              <button onClick={() => setAuthOpen(true)} className="rounded-xl bg-white px-5 py-2 text-sm font-semibold text-slate-900 transition hover:bg-white/90">Sign in</button>
+              <button onClick={handleCheckout} className="rounded-xl border border-white/20 bg-white/5 px-5 py-2 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10">Checkout</button>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="mx-auto max-w-6xl px-6 py-8 text-center text-xs text-slate-500">
+      <footer className="mx-auto max-w-7xl px-6 py-10 text-center text-xs text-slate-500">
         © {new Date().getFullYear()} Glasmart. All rights reserved.
       </footer>
 
