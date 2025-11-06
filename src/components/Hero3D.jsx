@@ -6,7 +6,7 @@ export default function Hero3D() {
     <section className="relative w-full h-[520px] md:h-[640px] overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       <div className="absolute inset-0">
         <Spline
-          scene="https://prod.spline.design/41MGRk-UDPKO-l6W/scene.splinecode"
+          scene="https://prod.spline.design/igThmltzmqv5hkWo/scene.splinecode"
           style={{ width: '100%', height: '100%' }}
         />
       </div>

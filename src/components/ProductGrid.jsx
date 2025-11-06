@@ -1,34 +1,36 @@
 import React from 'react';
 import { Star } from 'lucide-react';
 
+const fallback = 'https://placehold.co/800x600/edf2f7/334155?text=Image+unavailable';
+
 const products = [
   {
     id: 'p1',
     title: 'Glass Card - Aurora',
     price: 129,
     rating: 4.8,
-    img: 'https://images.unsplash.com/photo-1611162618071-b39a2ec1ef01?q=80&w=1200&auto=format&fit=crop',
+    img: 'https://picsum.photos/seed/aurora-card/800/600',
   },
   {
     id: 'p2',
     title: 'Minimal Wallet',
     price: 89,
     rating: 4.6,
-    img: 'https://images.unsplash.com/photo-1544256718-3bcf237f3978?q=80&w=1200&auto=format&fit=crop',
+    img: 'https://picsum.photos/seed/minimal-wallet/800/600',
   },
   {
     id: 'p3',
     title: 'Contactless Reader',
     price: 159,
     rating: 4.7,
-    img: 'https://images.unsplash.com/photo-1556742400-b5b7c5121f9a?q=80&w=1200&auto=format&fit=crop',
+    img: 'https://picsum.photos/seed/contactless-reader/800/600',
   },
   {
     id: 'p4',
     title: 'Metal Card - Onyx',
     price: 149,
     rating: 4.9,
-    img: 'https://images.unsplash.com/photo-1616077168122-0223bce04388?q=80&w=1200&auto=format&fit=crop',
+    img: 'https://picsum.photos/seed/onyx-card/800/600',
   },
 ];
 
@@ -45,7 +47,15 @@ export default function ProductGrid({ onAdd }) {
         {products.map((p) => (
           <article key={p.id} className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md">
             <div className="relative aspect-[4/3] overflow-hidden">
-              <img src={p.img} alt={p.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+              <img
+                src={p.img}
+                alt={p.title}
+                loading="lazy"
+                onError={(e) => {
+                  if (e.currentTarget.src !== fallback) e.currentTarget.src = fallback;
+                }}
+                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+              />
               <div className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-1 text-xs font-medium text-slate-700 shadow">
                 <Star className="h-3 w-3 text-amber-500" /> {p.rating}
               </div>
